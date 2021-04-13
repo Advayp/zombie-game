@@ -2,7 +2,7 @@
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float moveSpeed, maxSpeed;
+    [SerializeField] private float moveSpeed, maxSpeed;
 
     private Rigidbody rb;
     private float mag;
@@ -15,24 +15,12 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         mag = rb.velocity.magnitude;
-
         if (mag >= maxSpeed) return;
 
-        if (Input.GetKey(KeyCode.W))
-        {
-            rb.AddForce(transform.forward * moveSpeed * Time.deltaTime);
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            rb.AddForce(-transform.forward * moveSpeed * Time.deltaTime);
-        }
-        if (Input.GetKey(KeyCode.A))
-        {
-            rb.AddForce(-transform.right * moveSpeed * Time.deltaTime);
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            rb.AddForce(transform.right * moveSpeed * Time.deltaTime);
-        }
+        float x = Input.GetAxisRaw("Horizontal");
+        float z = Input.GetAxisRaw("Vertical");
+
+        rb.AddForce(transform.forward * z * moveSpeed * Time.deltaTime);
+        rb.AddForce(transform.right * x * moveSpeed * Time.deltaTime);
     }
 }
