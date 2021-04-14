@@ -2,13 +2,13 @@
 
 public class Gun : MonoBehaviour
 {
-    [SerializeField] private GameObject impactEffect;
-    [SerializeField] private GameObject mainCamera;
-    [SerializeField] private float destroyDelay;
+    [SerializeField] private GameObject bullet;
+    [SerializeField] private Transform mainCamera, gunTip;
+
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetButtonDown("Fire1"))
         {
             Shoot();
         }
@@ -16,11 +16,6 @@ public class Gun : MonoBehaviour
 
     private void Shoot()
     {
-        RaycastHit hit;
-        if (Physics.Raycast(mainCamera.transform.position, mainCamera.transform.forward, out hit))
-        {
-            var impactGO = Instantiate(impactEffect, hit.point, Quaternion.identity);
-            Destroy(impactGO, destroyDelay);
-        }
+        var shotBullet = Instantiate(bullet, gunTip.position, mainCamera.localRotation);
     }
 }
