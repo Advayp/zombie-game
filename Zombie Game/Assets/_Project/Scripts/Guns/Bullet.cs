@@ -1,11 +1,11 @@
-﻿using UnityEngine;
-
-namespace Zombie.Guns
+﻿namespace Zombie.Guns
 {
+    using UnityEngine;
     public class Bullet : MonoBehaviour
     {
         [SerializeField] private float bulletSpeed, maxDistance = 20;
         [SerializeField] private Transform player;
+        [SerializeField] private string gunTag;
 
         private Rigidbody rb;
 
@@ -26,10 +26,11 @@ namespace Zombie.Guns
             }
         }
 
-        private void OnCollisionEnter(Collision other)
+        private void OnTriggerEnter(Collider other)
         {
             Destroy(gameObject);
         }
+
     }
 
 }

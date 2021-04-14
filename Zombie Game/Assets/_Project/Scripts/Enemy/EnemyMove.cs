@@ -15,6 +15,8 @@
         private void Awake()
         {
             agent = GetComponent<NavMeshAgent>();
+            if (target == null)
+                target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
             damageable = target.gameObject.GetComponent<IDamageable>();
         }
 

@@ -7,7 +7,7 @@
         [SerializeField] private float moveSpeed, maxSpeed, playerHealth;
 
         private Rigidbody rb;
-        private float mag;
+        private float mag = 0f;
 
         public float Health { get; set; }
 
