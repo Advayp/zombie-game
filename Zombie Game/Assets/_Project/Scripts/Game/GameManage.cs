@@ -6,6 +6,7 @@
     public class GameManage : MonoBehaviour
     {
         [SerializeField] private GameObject player;
+        [SerializeField] private GameObject gameEndedUI;
         [SerializeField] private GameObject[] objectsToDisableOnDeath;
 
 
@@ -17,28 +18,25 @@
             objectsToDisableOnDeath = GameObject.FindGameObjectsWithTag("enableable");
         }
 
-        private void Update()
+        private void Start()
         {
-            if (damageable == null) return;
-            if (!damageable.IsDead) return;
-
-            if (Input.GetKeyDown(KeyCode.R))
-            {
-                ResetGame();
-            }
-
-            EndGame();
+            damageable.Death += EndGame;
         }
 
-        private void EndGame()
+        public void EndGame()
         {
+            gameEndedUI.SetActive(true);
             foreach (var objectToDisable in objectsToDisableOnDeath)
             {
+                if (objectToDisable == null) continue;
                 var enableable = objectToDisable.GetComponent<IEnableable>();
                 if (enableable == null) continue;
-
                 enableable.Disable();
+
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
             }
+            damageable.Death -= EndGame;
         }
 
         public void ResetGame()

@@ -12,7 +12,7 @@
         private void Update()
         {
             if (!_isEnabled) return;
-            if (Input.GetButtonDown("Fire1"))
+            if (Input.GetButtonDown("Fire1") || Input.GetKeyDown(KeyCode.E))
             {
                 Shoot();
             }
