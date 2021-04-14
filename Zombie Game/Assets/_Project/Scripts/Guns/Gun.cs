@@ -1,21 +1,22 @@
-﻿using UnityEngine;
-
-public class Gun : MonoBehaviour
+﻿namespace Zombie.Guns
 {
-    [SerializeField] private GameObject bullet;
-    [SerializeField] private Transform mainCamera, gunTip;
-
-
-    private void Update()
+    using UnityEngine;
+    public class Gun : MonoBehaviour
     {
-        if (Input.GetButtonDown("Fire1"))
+        [SerializeField] private GameObject bullet;
+        [SerializeField] private Transform mainCamera, gunTip;
+
+        private void Update()
         {
-            Shoot();
+            if (Input.GetButtonDown("Fire1"))
+            {
+                Shoot();
+            }
         }
-    }
 
-    private void Shoot()
-    {
-        var shotBullet = Instantiate(bullet, gunTip.position, mainCamera.localRotation);
+        private void Shoot()
+        {
+            Instantiate(bullet, gunTip.position, mainCamera.localRotation);
+        }
     }
 }

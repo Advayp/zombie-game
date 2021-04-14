@@ -1,19 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class MoveCamera : MonoBehaviour
+﻿namespace Zombie.Player
 {
-    [SerializeField] private Transform head;
-    private Transform _transform;
-
-    private void Awake()
+    using UnityEngine;
+    public class MoveCamera : MonoBehaviour
     {
-        _transform = transform;
-    }
+        [SerializeField] private Transform head;
 
-    private void Update()
-    {
-        _transform.position = head.position;    
+        private void Update()
+        {
+            transform.position = head.position;
+        }
     }
 }

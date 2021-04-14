@@ -1,26 +1,47 @@
-﻿using UnityEngine;
-
-public class PlayerMovement : MonoBehaviour
+﻿namespace Zombie.Player
 {
-    [SerializeField] private float moveSpeed, maxSpeed;
-
-    private Rigidbody rb;
-    private float mag;
-
-    private void Awake()
+    using UnityEngine;
+    using Zombie.Core;
+    public class PlayerMovement : MonoBehaviour, IDamageable
     {
-        rb = GetComponent<Rigidbody>();
-    }
+        [SerializeField] private float moveSpeed, maxSpeed, playerHealth;
 
-    private void Update()
-    {
-        mag = rb.velocity.magnitude;
-        if (mag >= maxSpeed) return;
+        private Rigidbody rb;
+        private float mag;
 
-        float x = Input.GetAxisRaw("Horizontal");
-        float z = Input.GetAxisRaw("Vertical");
+        public float Health { get; set; }
 
-        rb.AddForce(transform.forward * z * moveSpeed * Time.deltaTime);
-        rb.AddForce(transform.right * x * moveSpeed * Time.deltaTime);
+        public void TakeDamage(float amount)
+        {
+            Health -= amount;
+            if (Health <= 0) Die();
+        }
+
+        public void Die()
+        {
+            gameObject.SetActive(false);
+        }
+
+        private void Awake()
+        {
+            rb = GetComponent<Rigidbody>();
+        }
+
+        private void Start()
+        {
+            Health = playerHealth;
+        }
+
+        private void Update()
+        {
+            mag = rb.velocity.magnitude;
+            if (mag >= maxSpeed) return;
+
+            float x = Input.GetAxisRaw("Horizontal");
+            float z = Input.GetAxisRaw("Vertical");
+
+            rb.AddForce(transform.forward * z * moveSpeed * Time.deltaTime);
+            rb.AddForce(transform.right * x * moveSpeed * Time.deltaTime);
+        }
     }
 }
