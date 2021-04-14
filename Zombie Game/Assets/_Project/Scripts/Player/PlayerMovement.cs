@@ -2,7 +2,6 @@
 {
     using UnityEngine;
     using Zombie.Core;
-    using System;
     public class PlayerMovement : MonoBehaviour, IEnableable
     {
         [SerializeField] private float moveSpeed, maxSpeed;
