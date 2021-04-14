@@ -1,6 +1,6 @@
 # Zombie Game
 
-![Screenshot of Game](./Screenshot.png)
+![Screenshot of Game](https://github.com/Advayp/zombie-game/blob/main/Screenshot.PNG)
 
 ## About
 
