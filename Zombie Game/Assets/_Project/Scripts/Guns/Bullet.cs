@@ -7,11 +7,11 @@
         [SerializeField] private Transform player;
         [SerializeField] private string gunTag;
 
-        private Rigidbody rb;
+        private Rigidbody _rb;
 
         private void Awake()
         {
-            rb = GetComponent<Rigidbody>();
+            _rb = GetComponent<Rigidbody>();
         }
 
         private void Update()
@@ -19,7 +19,7 @@
             // Stops the original bullet prefab from destroying
             if (gameObject.name == "Bullet") return;
 
-            rb.AddForce(transform.forward * bulletSpeed * Time.deltaTime);
+            _rb.AddForce(transform.forward * bulletSpeed * Time.deltaTime);
             if ((transform.position - player.position).sqrMagnitude >= maxDistance * maxDistance)
             {
                 Destroy(gameObject);

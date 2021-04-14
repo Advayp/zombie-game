@@ -4,7 +4,6 @@ namespace Zombie.Core
     {
         float Health { get; set; }
         void TakeDamage(float amount);
-
-        void Die();
+        bool IsDead { get; set; }
     }
 }

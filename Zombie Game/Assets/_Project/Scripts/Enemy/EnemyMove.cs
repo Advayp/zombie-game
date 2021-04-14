@@ -9,21 +9,22 @@
         [SerializeField] private string bulletTag, damageableName;
         [SerializeField] private float damage;
 
-        private IDamageable damageable;
-        private NavMeshAgent agent;
+        private IDamageable _damageable;
+        private NavMeshAgent _agent;
 
         private void Awake()
         {
-            agent = GetComponent<NavMeshAgent>();
+            _agent = GetComponent<NavMeshAgent>();
             if (target == null)
                 target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
-            damageable = target.gameObject.GetComponent<IDamageable>();
+            _damageable = target.gameObject.GetComponent<IDamageable>();
         }
 
 
         private void Update()
         {
-            agent.SetDestination(target.position);
+            if (_damageable.IsDead) return;
+            _agent.SetDestination(target.position);
         }
 
         private void OnTriggerEnter(Collider other)
@@ -35,7 +36,7 @@
             }
             else if (other.gameObject.name == target.gameObject.name)
             {
-                damageable.TakeDamage(damage);
+                _damageable.TakeDamage(damage);
             }
 
         }

@@ -9,7 +9,8 @@
         [SerializeField] private float enemySpawnDelay;
         [SerializeField] private GameObject enemyPrefab;
 
-        private bool isSpawning = true;
+        [HideInInspector]
+        public bool IsSpawning = true;
 
         private void Start()
         {
@@ -18,7 +19,7 @@
 
         private IEnumerator SpawnCoroutine(float delay)
         {
-            while (isSpawning)
+            while (IsSpawning)
             {
                 int index = Random.Range(0, spawnLocations.Length);
                 Instantiate(enemyPrefab, spawnLocations[index].position, Quaternion.identity);
