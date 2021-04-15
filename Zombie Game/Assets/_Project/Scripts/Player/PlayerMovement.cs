@@ -7,6 +7,7 @@
         [SerializeField] private float moveSpeed, maxSpeed;
 
         private Rigidbody _rb;
+        private IDamageable _health;
         private float _mag = 0f;
         private bool _isEnabled = true;
 
@@ -14,10 +15,12 @@
         private void Awake()
         {
             _rb = GetComponent<Rigidbody>();
+            _health = GetComponent<IDamageable>();
         }
 
         private void Update()
         {
+            if (_health.IsDead) return;
             _mag = _rb.velocity.magnitude;
             if (_mag >= maxSpeed || !_isEnabled) return;
 

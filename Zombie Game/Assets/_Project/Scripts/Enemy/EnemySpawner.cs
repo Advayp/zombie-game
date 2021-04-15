@@ -1,23 +1,23 @@
 ﻿namespace Zombie.Enemy
 {
     using UnityEngine;
+    using Zombie.Core;
     using System.Collections;
     using Random = UnityEngine.Random;
-    public class EnemySpawner : MonoBehaviour
+    public class EnemySpawner : MonoBehaviour, ISpawner
     {
         [SerializeField] private Transform[] spawnLocations;
         [SerializeField] private float enemySpawnDelay;
         [SerializeField] private GameObject enemyPrefab;
-
-        [HideInInspector]
-        public bool IsSpawning = true;
+        public bool IsSpawning { get; set; }
 
         private void Start()
         {
+            IsSpawning = true;
             StartCoroutine(SpawnCoroutine(enemySpawnDelay));
         }
 
-        private IEnumerator SpawnCoroutine(float delay)
+        public IEnumerator SpawnCoroutine(float delay)
         {
             while (IsSpawning)
             {
