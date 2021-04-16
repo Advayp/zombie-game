@@ -1,8 +1,10 @@
-﻿namespace Zombie.Game
+﻿using UnityEngine;
+using UnityEngine.SceneManagement;
+using Zombie.Core;
+using Zombie.Enemy;
+
+namespace Zombie.Game
 {
-    using UnityEngine;
-    using UnityEngine.SceneManagement;
-    using Zombie.Core;
     public class GameManage : MonoBehaviour
     {
         [SerializeField] private GameObject player;
@@ -10,27 +12,28 @@
         [SerializeField] private GameObject[] objectsToDisableOnDeath;
         [SerializeField] private GameObject enemySpawner;
 
-        private ISpawner _spawner;
-        private IDamageable _damageable;
+        private ISpawner spawner;
+        private IDamageable damageable;
 
         private void Awake()
         {
-            _damageable = player.GetComponent<IDamageable>();
-            _spawner = enemySpawner.GetComponent<ISpawner>();
+            damageable = player.GetComponent<IDamageable>();
+            spawner = enemySpawner.GetComponent<ISpawner>();
             objectsToDisableOnDeath = GameObject.FindGameObjectsWithTag("enableable");
         }
 
         private void Start()
         {
-            _damageable.Death += EndGame;
+            EnemyController.KillCount = 0;
+            damageable.Death += EndGame;
         }
 
-        public void EndGame()
+        private void EndGame()
         {
             gameEndedUI.SetActive(true);
             foreach (var objectToDisable in objectsToDisableOnDeath)
             {
-                _spawner.IsSpawning = false;
+                spawner.IsSpawning = false;
                 if (objectToDisable == null) continue;
                 var enableable = objectToDisable.GetComponent<IEnableable>();
                 if (enableable == null) continue;
@@ -39,7 +42,7 @@
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
             }
-            _damageable.Death -= EndGame;
+            damageable.Death -= EndGame;
         }
 
         public void ResetGame()

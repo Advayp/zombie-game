@@ -1,11 +1,11 @@
-﻿namespace Zombie.Player
+﻿using System;
+using UnityEngine;
+using Zombie.Core;
+
+namespace Zombie.Player
 {
-    using UnityEngine;
-    using System;
-    using Zombie.Core;
     public class PlayerHealth : MonoBehaviour, IDamageable
     {
-        [SerializeField] private string dividerTag;
         [SerializeField] private float playerMaxHealth;
 
         public event Action Death;

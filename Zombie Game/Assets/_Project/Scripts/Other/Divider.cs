@@ -1,7 +1,8 @@
-﻿namespace Zombie.Other
+﻿using UnityEngine;
+using Zombie.Core;
+
+namespace Zombie.Other
 {
-    using UnityEngine;
-    using Zombie.Core;
     public class Divider : MonoBehaviour
     {
         [SerializeField] private string playerName;
@@ -14,7 +15,7 @@
             // This comparison will get called a lot
             // That is why I cache the result in a 
             // variable
-            if (!(otherGO.name == playerName)) return;
+            if (otherGO.name != playerName) return;
             var damageable = otherGO.GetComponent<IDamageable>();
             if (damageable == null) return;
 

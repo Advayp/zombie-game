@@ -8,6 +8,7 @@ TagManager:
   - Gun
   - enableable
   - Divider
+  - Ammo
   layers:
   - Default
   - TransparentFX

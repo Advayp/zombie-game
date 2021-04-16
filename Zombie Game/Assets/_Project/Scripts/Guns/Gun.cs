@@ -1,17 +1,28 @@
-﻿namespace Zombie.Guns
+﻿using Zombie.Core;
+using UnityEngine;
+using Zombie.Core;
+
+namespace Zombie.Guns
 {
-    using UnityEngine;
-    using Zombie.Core;
     public class Gun : MonoBehaviour, IEnableable
     {
         [SerializeField] private GameObject bullet;
         [SerializeField] private Transform mainCamera, gunTip;
+        [SerializeField] private GameObject ammoTracker;
 
-        private bool _isEnabled = true;
+        private IAmmoCounter ammoCounter;
+        
+
+        private bool isEnabled = true;
+
+        private void Awake()
+        {
+            ammoCounter = ammoTracker.GetComponent<IAmmoCounter>();
+        }
 
         private void Update()
         {
-            if (!_isEnabled) return;
+            if (!isEnabled) return;
             if (Input.GetButtonDown("Fire1") || Input.GetKeyDown(KeyCode.E))
             {
                 Shoot();
@@ -20,17 +31,15 @@
 
         private void Shoot()
         {
+            if (ammoCounter.AmmoCount <= 0) return;
+            ammoCounter.AmmoCount -= 1;
             Instantiate(bullet, gunTip.position, mainCamera.localRotation);
         }
-
-        public void Enable()
-        {
-            _isEnabled = true;
-        }
+        
 
         public void Disable()
         {
-            _isEnabled = false;
+            isEnabled = false;
         }
     }
 }

@@ -1,6 +1,7 @@
+using System;
+
 namespace Zombie.Core
 {
-    using System;
     public interface IDamageable
     {
         float Health { get; set; }

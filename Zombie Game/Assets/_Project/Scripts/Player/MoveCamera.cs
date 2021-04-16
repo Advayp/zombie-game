@@ -1,6 +1,7 @@
-﻿namespace Zombie.Player
+﻿using UnityEngine;
+
+namespace Zombie.Player
 {
-    using UnityEngine;
     public class MoveCamera : MonoBehaviour
     {
         [SerializeField] private Transform head;

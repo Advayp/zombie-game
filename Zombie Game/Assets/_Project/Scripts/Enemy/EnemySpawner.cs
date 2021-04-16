@@ -1,30 +1,36 @@
-﻿namespace Zombie.Enemy
+﻿using System;
+using System.Collections;
+using UnityEngine;
+using Zombie.Core;
+using Random = UnityEngine.Random;
+
+namespace Zombie.Enemy
 {
-    using UnityEngine;
-    using Zombie.Core;
-    using System.Collections;
-    using Random = UnityEngine.Random;
     public class EnemySpawner : MonoBehaviour, ISpawner
     {
         [SerializeField] private Transform[] spawnLocations;
         [SerializeField] private float enemySpawnDelay;
         [SerializeField] private GameObject enemyPrefab;
+
+
         public bool IsSpawning { get; set; }
 
         private void Start()
         {
             IsSpawning = true;
-            StartCoroutine(SpawnCoroutine(enemySpawnDelay));
+            StartCoroutine(SpawnCoroutine());
         }
 
-        public IEnumerator SpawnCoroutine(float delay)
+        
+        private IEnumerator SpawnCoroutine()
         {
             while (IsSpawning)
             {
-                int index = Random.Range(0, spawnLocations.Length);
-                Instantiate(enemyPrefab, spawnLocations[index].position, Quaternion.identity);
-                yield return new WaitForSeconds(delay);
+                var index = Random.Range(0, spawnLocations.Length);
+                Instantiate(enemyPrefab, spawnLocations[index].position, Quaternion.identity); 
+                yield return new WaitForSeconds(enemySpawnDelay);
             }
         }
+
     }
 }

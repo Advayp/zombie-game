@@ -1,8 +1,9 @@
-﻿namespace Zombie.UI
+﻿using UnityEngine;
+using UnityEngine.UI;
+using Zombie.Core;
+
+namespace Zombie.UI
 {
-    using UnityEngine;
-    using UnityEngine.UI;
-    using Zombie.Core;
     [RequireComponent(typeof(Slider))]
     public class HealthBar : MonoBehaviour
     {

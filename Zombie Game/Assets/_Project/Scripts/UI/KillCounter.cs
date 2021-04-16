@@ -1,8 +1,9 @@
-﻿namespace Zombie.UI
+﻿using TMPro;
+using UnityEngine;
+using Zombie.Enemy;
+
+namespace Zombie.UI
 {
-    using UnityEngine;
-    using TMPro;
-    using Zombie.Enemy;
     [RequireComponent(typeof(TMP_Text))]
     public class KillCounter : MonoBehaviour
     {
@@ -15,8 +16,7 @@
 
         private void Update()
         {
-            // There is probably a better way of doing this
-            label.SetText($"Kills: {EnemyController.killCount}");
+            label.SetText($"Kills: {EnemyController.KillCount}");
         }
     }
 }

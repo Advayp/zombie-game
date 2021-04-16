@@ -1,17 +1,17 @@
-﻿namespace Zombie.Guns
+﻿using UnityEngine;
+
+namespace Zombie.Guns
 {
-    using UnityEngine;
     public class Bullet : MonoBehaviour
     {
         [SerializeField] private float bulletSpeed, maxDistance = 20;
         [SerializeField] private Transform player;
-        [SerializeField] private string gunTag;
 
-        private Rigidbody _rb;
+        private Rigidbody rb;
 
         private void Awake()
         {
-            _rb = GetComponent<Rigidbody>();
+            rb = GetComponent<Rigidbody>();
         }
 
         private void Update()
@@ -19,7 +19,7 @@
             // Stops the original bullet prefab from destroying
             if (gameObject.name == "Bullet") return;
 
-            _rb.AddForce(transform.forward * bulletSpeed * Time.deltaTime);
+            rb.AddForce(transform.forward * (bulletSpeed * Time.deltaTime));
             if ((transform.position - player.position).sqrMagnitude >= maxDistance * maxDistance)
             {
                 Destroy(gameObject);

@@ -4,14 +4,11 @@
 //
 // "Enable/Disable Headbob, Changed look rotations - should result in reduced camera jitters" || version 1.0.1
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
 #if UNITY_EDITOR
     using UnityEditor;
-    using System.Net;
+
 #endif
 
 public class FirstPersonController : MonoBehaviour
@@ -23,7 +20,7 @@ public class FirstPersonController : MonoBehaviour
     public Camera playerCamera;
 
     public float fov = 60f;
-    public bool invertCamera = false;
+    public bool invertCamera;
     public bool cameraCanMove = true;
     public float mouseSensitivity = 2f;
     public float maxLookAngle = 50f;
@@ -35,20 +32,20 @@ public class FirstPersonController : MonoBehaviour
     public Color crosshairColor = Color.white;
 
     // Internal Variables
-    private float yaw = 0.0f;
-    private float pitch = 0.0f;
+    private float yaw;
+    private float pitch;
     private Image crosshairObject;
 
     #region Camera Zoom Variables
 
     public bool enableZoom = true;
-    public bool holdToZoom = false;
+    public bool holdToZoom;
     public KeyCode zoomKey = KeyCode.Mouse1;
     public float zoomFOV = 30f;
     public float zoomStepTime = 5f;
 
     // Internal Variables
-    private bool isZoomed = false;
+    private bool isZoomed;
 
     #endregion
     #endregion
@@ -60,12 +57,12 @@ public class FirstPersonController : MonoBehaviour
     public float maxVelocityChange = 10f;
 
     // Internal Variables
-    private bool isWalking = false;
+    private bool isWalking;
 
     #region Sprint
 
     public bool enableSprint = true;
-    public bool unlimitedSprint = false;
+    public bool unlimitedSprint;
     public KeyCode sprintKey = KeyCode.LeftShift;
     public float sprintSpeed = 7f;
     public float sprintDuration = 5f;
@@ -83,11 +80,11 @@ public class FirstPersonController : MonoBehaviour
 
     // Internal Variables
     private CanvasGroup sprintBarCG;
-    private bool isSprinting = false;
+    private bool isSprinting;
     private float sprintRemaining;
     private float sprintBarWidth;
     private float sprintBarHeight;
-    private bool isSprintCooldown = false;
+    private bool isSprintCooldown;
     private float sprintCooldownReset;
 
     #endregion
@@ -99,7 +96,7 @@ public class FirstPersonController : MonoBehaviour
     public float jumpPower = 5f;
 
     // Internal Variables
-    private bool isGrounded = false;
+    private bool isGrounded;
 
     #endregion
 
@@ -112,7 +109,7 @@ public class FirstPersonController : MonoBehaviour
     public float speedReduction = .5f;
 
     // Internal Variables
-    private bool isCrouched = false;
+    private bool isCrouched;
     private Vector3 originalScale;
 
     #endregion
@@ -127,7 +124,7 @@ public class FirstPersonController : MonoBehaviour
 
     // Internal Variables
     private Vector3 jointOriginalPos;
-    private float timer = 0;
+    private float timer;
 
     #endregion
 

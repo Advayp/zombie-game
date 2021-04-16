@@ -132,3 +132,4 @@ MonoBehaviour:
   target: {fileID: 0}
   bulletTag: Bullet
   damage: 1
+  ammoToGive: 2
