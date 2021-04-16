@@ -1,6 +1,6 @@
 ﻿using TMPro;
 using UnityEngine;
-using Zombie.Enemy;
+using Zombie.Core;
 
 namespace Zombie.UI
 {
@@ -14,9 +14,14 @@ namespace Zombie.UI
             label = GetComponent<TMP_Text>();
         }
 
-        private void Update()
+        private void Start()
         {
-            label.SetText($"Kills: {EnemyController.KillCount}");
+            EnemyController.OnKill += UpdateLabel;
+        }
+
+        private void UpdateLabel(int newCount)
+        {
+            label.SetText($"Kills: {newCount}");
         }
     }
 }

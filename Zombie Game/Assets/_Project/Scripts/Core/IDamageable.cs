@@ -4,10 +4,10 @@ namespace Zombie.Core
 {
     public interface IDamageable
     {
-        float Health { get; set; }
-        float maxHealth { get; set; }
+        float Health { get; }
+        float maxHealth { get; }
         void TakeDamage(float amount);
-        bool IsDead { get; set; }
+        bool IsDead { get; }
 
         event Action Death;
     }

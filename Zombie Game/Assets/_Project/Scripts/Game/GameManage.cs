@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using Zombie.Core;
-using Zombie.Enemy;
 
 namespace Zombie.Game
 {

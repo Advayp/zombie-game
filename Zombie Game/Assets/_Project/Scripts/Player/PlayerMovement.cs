@@ -36,6 +36,5 @@ namespace Zombie.Player
         {
             isEnabled = false;
         }
-
     }
 }

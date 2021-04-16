@@ -10,9 +10,9 @@ namespace Zombie.Player
 
         public event Action Death;
 
-        public float Health { get; set; }
-        public float maxHealth { get; set; }
-        public bool IsDead { get; set; }
+        public float Health { get; private set; }
+        public float maxHealth { get; private set; }
+        public bool IsDead { get; private set; }
 
         private void Awake()
         {

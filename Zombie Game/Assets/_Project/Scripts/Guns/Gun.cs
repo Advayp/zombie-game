@@ -1,6 +1,5 @@
 ﻿using Zombie.Core;
 using UnityEngine;
-using Zombie.Core;
 
 namespace Zombie.Guns
 {

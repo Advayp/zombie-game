@@ -1,10 +1,8 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.AI;
-using Zombie.Core;
-using System;
-using Zombie.Core;
 
-namespace Zombie.Enemy
+namespace Zombie.Core
 {
     public class EnemyController : MonoBehaviour
     {
@@ -22,9 +20,11 @@ namespace Zombie.Enemy
         private NavMeshAgent agent;
 
         public static int KillCount;
+        public static event Action<int> OnKill;
 
         private void Awake()
         {
+            OnKill += IncrementCount;
             agent = GetComponent<NavMeshAgent>();
             if (target == null)
                 target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
@@ -44,7 +44,7 @@ namespace Zombie.Enemy
         {
             if (other.gameObject.CompareTag(bulletTag))
             {
-                KillCount++;
+                OnKill?.Invoke(KillCount + 1);
                 ammoCounter.AmmoCount += ammoToGive;
                 ammoCounter.UpdateText();
                 Destroy(gameObject);
@@ -53,6 +53,11 @@ namespace Zombie.Enemy
             {
                 damageable.TakeDamage(damage);
             }
+        }
+
+        private static void IncrementCount(int a)
+        {
+            KillCount = a;
         }
     }
 }

@@ -263,6 +263,7 @@ MonoBehaviour:
   enemySpawnDelay: 1
   enemyPrefab: {fileID: 7144135393989270622, guid: dc8cd008be8785447a194cdb99891af5,
     type: 3}
+  multiplier: 30
 --- !u!4 &103199075
 Transform:
   m_ObjectHideFlags: 0
